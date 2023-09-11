@@ -1,7 +1,7 @@
 import React from "react";
 
 const PizzaBlock = (props) => {
-    const { id, imageUrl, title, types, sizes, price, category, rating } = props;
+    const { id, imageUrl, title, types, sizes, price } = props;
     const typesPizza = ['тонкое', 'традиционное'];
 
     const [activeType, setactiveType] = React.useState(0);
