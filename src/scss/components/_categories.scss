@@ -1,8 +1,15 @@
 @import '../variables';
+@import '../mixins.scss';
 
 .categories {
   ul {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @include vp-767 {
+      justify-content: center;
+    }
 
     li {
       background-color: #f9f9f9;

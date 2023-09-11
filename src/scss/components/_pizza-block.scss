@@ -1,16 +1,13 @@
 @import '../variables';
 
 .pizza-block {
-  width: 280px;
+  max-width: 280px;
   text-align: center;
+  justify-content: center;
   margin-bottom: 65px;
 
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
-  }
-
   &__image {
-    width: 260px;
+    max-width: 260px;
   }
 
   &__title {
@@ -21,6 +18,7 @@
   }
 
   &__selector {
+    max-width: 280px;
     display: flex;
     background-color: #f3f3f3;
     border-radius: 10px;
