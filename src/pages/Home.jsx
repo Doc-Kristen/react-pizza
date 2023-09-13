@@ -6,7 +6,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import { URL, sortingList } from '../const/const';
 
-const Home = () => {
+const Home = ({ searchValue }) => {
     const defaultItemCount = 6;
     const defaultSortType = sortingList[0];
 
@@ -18,20 +18,20 @@ const Home = () => {
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.sortProperty.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
 
+    const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+    const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
     React.useEffect(() => {
         setIsloading(true);
-        fetch(`${URL}?${category}&sortBy=${sortBy}&order=${order}`)
+        fetch(`${URL}?${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(`${URL}?${category}&sortBy=${sortBy}&order=${order}`);
-
                 setItems(data);
                 setIsloading(false);
-                console.log(sortType);
             });
         window.scrollTo(0, 0);
-    }, [category, categoryId, order, sortBy, sortType]);
+    }, [category, categoryId, order, sortBy, sortType, search]);
     return (
         <>
             <div className="content__top">
@@ -40,9 +40,7 @@ const Home = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {isLoading
-                    ? [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />)
-                    : items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+                {isLoading ? skeletones : pizzas}
             </div>
         </>
     )

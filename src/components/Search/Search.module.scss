@@ -27,3 +27,16 @@
         opacity: 1;
     }
 }
+
+.close {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    opacity: 0.2;
+    @include hover-focus {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
