@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { URL, sortingList } from '../const/const';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import { URL, sortingList } from '../const/const';
+import Pagination from '../components/Pagination';
 
 const Home = () => {
     const defaultItemCount = 6;
@@ -14,6 +15,7 @@ const Home = () => {
     const [items, setItems] = React.useState([]);
     const [categoryId, setCategoryId] = React.useState(0);
     const [sortType, setSortType] = React.useState(defaultSortType);
+    // const []
 
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.sortProperty.replace('-', '');
@@ -44,6 +46,7 @@ const Home = () => {
                     ? [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />)
                     : items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
             </div>
+            <Pagination pageCount={3} handlePageClick={console.log}/>
         </>
     )
 }

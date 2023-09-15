@@ -21,9 +21,4 @@
     border-radius: 10px;
     font-size: 16px;
     padding-left: 42px;
-    opacity: 0.2;
-
-    @include hover-focus {
-        opacity: 1;
-    }
 }

@@ -1,0 +1,28 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.root {
+    display: flex;
+    gap: 5px;
+
+    .link,
+    .next,
+    .previous {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $orange;
+    border-radius: 50%;
+    @include hover-focus {
+        cursor: pointer;
+        background-color: $orange;
+        color: $gray-line;
+    }
+    .disabled {
+        pointer-events: none;
+        opacity: 0.1;
+    }
+}
+}
