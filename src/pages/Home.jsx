@@ -6,16 +6,18 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
     const defaultItemCount = 6;
     const defaultSortType = sortingList[0];
 
+    const { searchValue } = React.useContext(SearchContext);
     const [isLoading, setIsloading] = React.useState(true);
     const [items, setItems] = React.useState([]);
     const [categoryId, setCategoryId] = React.useState(0);
     const [sortType, setSortType] = React.useState(defaultSortType);
-    // const []
+    const [currentPage, setCurrentPage] = React.useState(1);
 
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.sortProperty.replace('-', '');
@@ -26,14 +28,14 @@ const Home = ({ searchValue }) => {
     const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
     React.useEffect(() => {
         setIsloading(true);
-        fetch(`${URL}?${category}&sortBy=${sortBy}&order=${order}${search}`)
+        fetch(`${URL}?page=${currentPage}&limit=3${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);
                 setIsloading(false);
             });
         window.scrollTo(0, 0);
-    }, [category, categoryId, order, sortBy, sortType, search]);
+    }, [category, categoryId, order, sortBy, sortType, search, currentPage]);
     return (
         <>
             <div className="content__top">
@@ -44,9 +46,11 @@ const Home = ({ searchValue }) => {
             <div className="content__items">
                 {isLoading ? skeletones : pizzas}
             </div>
-            <Pagination pageCount={3} handlePageClick={console.log}/>
+            <Pagination
+                pageCount={4}
+                onPageChange={(number) => setCurrentPage(number)} />
         </>
     )
 }
 
-export default Home
+export default Home;

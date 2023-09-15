@@ -24,5 +24,14 @@
         pointer-events: none;
         opacity: 0.1;
     }
+
+    .active {
+        a {        background-color: $orange;
+            color: $gray-line;
+        }
+    }
+
+
+
 }
 }
