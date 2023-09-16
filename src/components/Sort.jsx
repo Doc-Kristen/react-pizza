@@ -1,10 +1,13 @@
 import React from "react";
-
 import { sortingList } from "../const/const";
-const Sort = ({ value, onClickSortType }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { setSortType } from "../redux/slices/filterSlice";
 
+const Sort = () => {
+  const dispatch = useDispatch();
+  const sort = useSelector(state => state.filter.sort);
   const [openSort, setOpenSort] = React.useState(false);
-  const sortname = value.name;
+  // const sortname = sort.n;
 
   return (
     <div className="sort">
@@ -23,8 +26,7 @@ const Sort = ({ value, onClickSortType }) => {
         <b>Сортировка по:</b>
         <span onClick={() => {
           setOpenSort(!openSort)
-          onClickSortType(value);
-        }}>{sortname}</span>
+        }}>{sort.name}</span>
       </div>
       {
         openSort && (
@@ -35,10 +37,10 @@ const Sort = ({ value, onClickSortType }) => {
                   <li
                     key={item.name.toString()}
                     onClick={() => {
-                      onClickSortType(item);
+                      dispatch(setSortType(item));
                       setOpenSort(!openSort);
                     }}
-                    className={value.sortProperty === item.sortProperty ? 'active' : ''}
+                    className={sort.sortProperty === item.sortProperty ? 'active' : ''}
 
                   >{item.name}</li>
                 )
