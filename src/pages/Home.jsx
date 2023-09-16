@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { URL } from '../const/const';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -33,12 +34,10 @@ const Home = () => {
     const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
     React.useEffect(() => {
         setIsloading(true);
-        fetch(`${URL}?${category}&sortBy=${sortBy}&order=${order}${search}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setItems(data);
-                setIsloading(false);
-            });
+        axios.get(`${URL}?${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
+            setItems(res.data);
+            setIsloading(false);
+        });
         window.scrollTo(0, 0);
     }, [category, categoryId, order, sortBy, search, currentPage]);
     return (
