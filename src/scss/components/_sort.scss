@@ -19,8 +19,8 @@
     }
 
     span {
-      color: $orange;
-      border-bottom: 1px dashed $orange;
+      color: $color-orange;
+      border-bottom: 1px dashed $color-orange;
       cursor: pointer;
     }
   }
@@ -49,7 +49,7 @@
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: $color-orange;
         }
       }
     }

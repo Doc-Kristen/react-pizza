@@ -8,7 +8,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 
 const Home = () => {
     const defaultItemCount = 6;
@@ -17,9 +17,8 @@ const Home = () => {
     const { searchValue } = React.useContext(SearchContext);
     const [isLoading, setIsloading] = React.useState(true);
     const [items, setItems] = React.useState([]);
-    const [currentPage, setCurrentPage] = React.useState(1);
 
-    const { categoryId, sort } = useSelector(state => state.filter);
+    const { categoryId, sort, currentPage } = useSelector(state => state.filter);
     const sortType = sort.sortProperty;
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
@@ -32,9 +31,12 @@ const Home = () => {
 
     const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
     const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
+    const onChangePage = number => dispatch(setCurrentPage(number));
+
     React.useEffect(() => {
         setIsloading(true);
-        axios.get(`${URL}?${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
+        axios.get(`${URL}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
+            console.log(`${URL}?${category}&limit=4$page=${currentPage}&sortBy=${sortBy}&order=${order}${search}`);
             setItems(res.data);
             setIsloading(false);
         });
@@ -51,8 +53,8 @@ const Home = () => {
                 {isLoading ? skeletones : pizzas}
             </div>
             <Pagination
-                pageCount={4}
-                onPageChange={(number) => setCurrentPage(number)} />
+                setCurrentPage={currentPage}
+                onPageChange={onChangePage} />
         </>
     )
 }
