@@ -36,7 +36,6 @@ const Home = () => {
     React.useEffect(() => {
         setIsloading(true);
         axios.get(`${URL}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
-            console.log(`${URL}?${category}&limit=4$page=${currentPage}&sortBy=${sortBy}&order=${order}${search}`);
             setItems(res.data);
             setIsloading(false);
         });
