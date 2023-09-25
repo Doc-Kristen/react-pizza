@@ -35,23 +35,6 @@ const Home = () => {
     const onChangePage = number => dispatch(setCurrentPage(number));
 
     React.useEffect(() => {
-      window.scrollTo(0, 0);
-      if (!isSearch.current) {
-        setIsLoading(true);
-          const order = sortType.includes('-') ? 'asc' : 'desc';
-          const sortBy = sortType.replace('-', '');
-          const category = categoryId > 0 ? `category=${categoryId}` : '';
-          const search = searchValue ? `&search=${searchValue}` : '';
-
-          axios.get(`${URL}/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
-              setItems(res.data);
-              setIsLoading(false);
-          });
-      }
-      isSearch.current = false;
-  }, [categoryId, currentPage, searchValue, sortType]);
-
-    React.useEffect(() => {
       if (isMounted.current) {
           const queryString = qs.stringify({
               sortProperty: sort.sortProperty,
@@ -74,6 +57,23 @@ const Home = () => {
           isSearch.current = true;
       }
   }, [dispatch]);
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!isSearch.current) {
+      setIsLoading(true);
+        const order = sortType.includes('-') ? 'asc' : 'desc';
+        const sortBy = sortType.replace('-', '');
+        const category = categoryId > 0 ? `category=${categoryId}` : '';
+        const search = searchValue ? `&search=${searchValue}` : '';
+
+        axios.get(`${URL}/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then((res) => {
+            setItems(res.data);
+            setIsLoading(false);
+        });
+    }
+    isSearch.current = false;
+}, [categoryId, currentPage, searchValue, sortType]);
 
     return (
         <>
