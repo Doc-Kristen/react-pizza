@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
 
 const CartItemComponent = (props) => {
-    const { id, title, type, price, count, imageUrl } = props;
+    const { id, title, type, price, count, imageUrl, size } = props;
     const dispatch = useDispatch();
     const cartMessage = () => window.confirm('Вы действительно хотите удалить товар из корзины?');
 
@@ -40,7 +40,7 @@ const CartItemComponent = (props) => {
             </div>
             <div className="cart__item-info">
                 <h3>{title}</h3>
-                <p>{type}, 26 см.</p>
+                <p>{type}, {size} см.</p>
             </div>
             <div className="cart__item-count">
                 <div onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
