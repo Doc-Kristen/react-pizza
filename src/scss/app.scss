@@ -1,7 +1,7 @@
-@import './variables';
-@import './libs/normalize';
-@import './components/all';
-@import './mixins';
+@import "./variables";
+@import "./libs/normalize";
+@import "./components/all";
+@import "./mixins";
 
 body {
   background-color: $color-background;
@@ -23,13 +23,25 @@ body {
     margin: 35px 0;
   }
 
+  &__error-info {
+    margin: 100px auto;
+    text-align: center;
+    h2 {
+      font-size: 30px;
+      font-weight: 700;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+
   &__items {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-column-gap: 10px;
-      grid-row-gap: 20px;
-      justify-items: center; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    justify-items: center;
 
     @include vp-1439 {
       grid-template-columns: repeat(3, 1fr);
@@ -40,7 +52,6 @@ body {
     @include vp-767 {
       grid-template-columns: repeat(1, 1fr);
     }
-
   }
 
   &__top {
