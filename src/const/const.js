@@ -1,4 +1,4 @@
-const URL = 'https://64ff2265f8b9eeca9e29ab12.mockapi.io';
+const URL = 'https://6512ba04b8c6ce52b39618e8.mockapi.io/';
 
 const sortingList = [
   { name: 'сначала популярные', sortProperty: 'rating' },

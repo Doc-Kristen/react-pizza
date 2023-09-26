@@ -35,6 +35,27 @@ body {
     }
   }
 
+  &__pizza {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 40px;
+    
+    .description {
+      font-size: 20px;
+    }
+
+    img {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    p {
+      font-size: 30px;
+    }
+  }
+
   &__items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
