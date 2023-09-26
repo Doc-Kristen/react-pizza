@@ -1,9 +1,10 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { URL } from '../const/const';
 
 const FullPizza = () => {
+    const navigate = useNavigate();
 
     const [pizza, setPizza] = React.useState();
     const { id } = useParams();
@@ -14,11 +15,11 @@ const FullPizza = () => {
                 const { data } = await axios.get(`${URL}/items/${id}`);
                 setPizza(data);
             } catch (e) {
-                console.log('Ошибка')
+                navigate('/*');
             }
         }
         fethchPizza();
-    }, [id]);
+    }, [id, navigate]);
 
     if (!pizza) {
         return <div>Загрузка...</div>
