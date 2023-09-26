@@ -2,12 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { URL } from '../../const/const';
 
-export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params) => {
+export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async (params, thunkAPI) => {
   const { sortBy, order, category, search, currentPage } = params;
   const { data } = await axios.get(
     `${URL}/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
   );
-  return data;
+  if (data.length === 0) {
+    return thunkAPI.rejectWithValue();
+  } else {
+    return thunkAPI.fulfillWithValue(data);
+  }
 });
 
 const initialState = {
@@ -38,6 +42,8 @@ const pizzaSlice = createSlice({
     },
   },
 });
+
+export const selectPizzaData = (state) => state.pizza;
 
 export const { setItems } = pizzaSlice.actions;
 

@@ -7,10 +7,9 @@ import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
   const defaultItemCount = 6;
@@ -19,18 +18,17 @@ const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { searchValue } = React.useContext(SearchContext);
-
-  const { categoryId, sort, currentPage } = useSelector(state => state.filter);
-  const { items, status } = useSelector(state => state.pizza);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizzaData);
 
   const sortType = sort.sortProperty;
+
+  const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+
+  const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
-
-  const pizzas = items.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
-  const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
   const onChangePage = number => dispatch(setCurrentPage(number));
 
   const getPizzas = async () => {
@@ -89,8 +87,8 @@ const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
       {
         status === 'error' ? (<div className='content__error-info'>
-          <h1>Ошибка загрузки:(</h1>
-          <p>Повторите запрос или зайдите позже.</p>
+          <h1>Пиццы не найдены:(</h1>
+          <p>Проверьте корректность запроса или попробуйте позже.</p>
         </div>) : (<div className="content__items"> {status === 'success' ? skeletones : pizzas}</div>)
       }
       <Pagination
