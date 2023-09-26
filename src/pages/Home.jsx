@@ -31,21 +31,6 @@ const Home = () => {
   };
   const onChangePage = number => dispatch(setCurrentPage(number));
 
-  const getPizzas = async () => {
-    const order = sortType.includes('-') ? 'asc' : 'desc';
-    const sortBy = sortType.replace('-', '');
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
-
-    dispatch(fetchPizzas({
-      sortBy,
-      order,
-      category,
-      search,
-      currentPage
-    }));
-  };
-
   React.useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
@@ -72,11 +57,26 @@ const Home = () => {
 
   React.useEffect(() => {
     if (!isSearch.current) {
+      
+  const getPizzas = async () => {
+    const order = sortType.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortType.replace('-', '');
+    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
+
+    dispatch(fetchPizzas({
+      sortBy,
+      order,
+      category,
+      search,
+      currentPage
+    }));
+  };
       getPizzas();
       window.scrollTo(0, 0);
     }
     isSearch.current = false;
-  }, [categoryId, currentPage, searchValue, sortType]);
+  }, [categoryId, currentPage, dispatch, searchValue, sortType]);
 
   return (
     <>
