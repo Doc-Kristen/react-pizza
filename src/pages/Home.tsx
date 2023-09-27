@@ -32,7 +32,7 @@ const Home: React.FC = () => {
   const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
   const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  }, []);
+  }, [dispatch]);
   const onChangePage = (page: number) => dispatch(setCurrentPage(page));
 
   React.useEffect(() => {
