@@ -45,7 +45,7 @@ const Sort = () => {
           <div className="sort__popup">
             <ul>
               {
-                sortingList.map((item, index) =>
+                sortingList.map((item) =>
                   <li
                     key={item.name.toString()}
                     onClick={() => {

@@ -27,9 +27,9 @@ const Home: React.FC = () => {
   const pizzas = items.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />);
 
   const skeletones = [...new Array(items.length || defaultItemCount)].map((_, index) => <Skeleton key={index} />);
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
   const onChangePage = (page: number) => dispatch(setCurrentPage(page));
 
   React.useEffect(() => {
@@ -71,7 +71,6 @@ const Home: React.FC = () => {
         const search = searchValue ? `&search=${searchValue}` : '';
 
         const page = currentPage.toString();
-
         dispatch(fetchPizzas({
           sortBy,
           order,

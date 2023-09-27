@@ -4,10 +4,10 @@ import logo from '../assets/img/pizza-logo.svg';
 import Search from './Search';
 import { selectCart } from '../redux/slices/cartSlice';
 
-const Header : React.FC = () => {
+const Header: React.FC = () => {
     const { pathname } = useLocation();
     const { items, totalPrice } = useSelector(selectCart);
-    const totalCount = items.reduce((acc : number, item : any) => item.count + acc, 0);
+    const totalCount = items.reduce((acc: number, item: any) => item.count + acc, 0);
     return (
         <div className="header">
             <div className="container">
@@ -20,7 +20,7 @@ const Header : React.FC = () => {
                         </div>
                     </div>
                 </Link>
-                <Search />
+                {pathname !== '/cart' && <Search />}
                 <div className="header__cart">
                     {pathname !== '/cart' &&
                         <Link to="/cart" className="button button--cart">
