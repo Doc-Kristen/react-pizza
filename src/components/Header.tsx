@@ -2,8 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import logo from '../assets/img/pizza-logo.svg';
 import Search from './Search';
-import { selectCart } from '../redux/slices/cartSlice';
 import React from 'react';
+import { selectCart } from '../redux/cart/selectors';
 
 const Header: React.FC = () => {
     const { pathname } = useLocation();

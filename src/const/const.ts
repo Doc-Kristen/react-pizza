@@ -1,4 +1,4 @@
-import { SortProperty } from "../redux/slices/filterSlice";
+import { SortProperty } from "../redux/filter/types";
 
 const URL = 'https://6512ba04b8c6ce52b39618e8.mockapi.io/';
 
