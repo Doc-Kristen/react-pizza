@@ -12,7 +12,7 @@ type CartItemComponentProps = {
     size: number;
 }
 
-const CartItemComponent : React.FC<CartItemComponentProps> = (props) => {
+const CartItemComponent: React.FC<CartItemComponentProps> = (props) => {
     const { id, title, type, price, count, imageUrl, size } = props;
     const dispatch = useAppDispatch();
     const cartMessage = () => window.confirm('Вы действительно хотите удалить товар из корзины?');
@@ -20,7 +20,7 @@ const CartItemComponent : React.FC<CartItemComponentProps> = (props) => {
     const onClickPlus = () => dispatch(
         addItem({
             id,
-        } as CartItem )
+        } as CartItem)
     );
 
     const onClickRemove = () => {
@@ -30,13 +30,7 @@ const CartItemComponent : React.FC<CartItemComponentProps> = (props) => {
     }
 
     const onClickMinus = () => {
-        if (count > 1) {
-            dispatch(minusItem(id));
-        } else {
-            if (cartMessage()) {
-                dispatch(removeItem(id));
-            }
-        }
+        dispatch(minusItem(id));
     };
 
     return (

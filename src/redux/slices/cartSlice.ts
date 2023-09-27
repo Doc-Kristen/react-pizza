@@ -51,7 +51,7 @@ const cartSlice = createSlice({
     minusItem(state, action: PayloadAction<string>) {
       const findItem = state.items.find((item) => item.id === action.payload);
       if (findItem) {
-        findItem.count--;
+        findItem.count = findItem.count - 1;
         state.totalPrice = state.items.reduce((acc, item) => item.count * item.price + acc, 0);
       }
     },

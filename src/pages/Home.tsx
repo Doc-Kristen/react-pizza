@@ -49,7 +49,6 @@ const Home: React.FC = () => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sort = sortingList.find((obj) => obj.sortProperty === params.sortProperty);
-      console.log(sort);
       dispatch(
         setFilters({
           searchValue: params.search as string,
