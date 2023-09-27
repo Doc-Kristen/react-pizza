@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './NotFoundComponent.module.scss';
 import { Link } from 'react-router-dom';
 
-const NotFoundComponent = () => {
+const NotFoundComponent : React.FC = () => {
     return (
         <div className={styles.root}>
             <h1> Ничего не найдено :(</h1>

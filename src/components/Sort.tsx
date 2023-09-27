@@ -1,18 +1,19 @@
 import React from "react";
 import { sortingList } from "../const/const";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectSort, setSortType } from "../redux/slices/filterSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Sort = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const sort = useSelector(selectSort);
   const [openSort, setOpenSort] = React.useState(false);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const handleClickOutside = (elem) => {
-      const path = elem.composedPath ? elem.composedPath() : elem.path;
-      if (!path.includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const path = event.composedPath();
+      if (sortRef.current && !path.includes(sortRef.current)) {
         setOpenSort(false);
       }
     }

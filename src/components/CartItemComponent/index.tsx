@@ -1,16 +1,26 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { addItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
+import { CartItem, addItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
+import { useAppDispatch } from '../../redux/store';
 
-const CartItemComponent = (props) => {
+type CartItemComponentProps = {
+    id: string;
+    title: string;
+    type: string
+    price: number
+    count: number;
+    imageUrl: string;
+    size: number;
+}
+
+const CartItemComponent : React.FC<CartItemComponentProps> = (props) => {
     const { id, title, type, price, count, imageUrl, size } = props;
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const cartMessage = () => window.confirm('Вы действительно хотите удалить товар из корзины?');
 
     const onClickPlus = () => dispatch(
         addItem({
             id,
-        })
+        } as CartItem )
     );
 
     const onClickRemove = () => {
