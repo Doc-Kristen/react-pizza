@@ -5,8 +5,8 @@ const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: 0,
   sort: {
-    name: 'популярности',
-    sortProperty: SortProperty.PRICE_DESC
+    name: 'цене (по возрастанию)',
+    sortProperty: SortProperty.PRICE_ASC
   },
   currentPage: 1,
 };
@@ -30,7 +30,7 @@ const filterSlice = createSlice({
     setFilters(state, action: PayloadAction<FilterSliceState>) {
       state.currentPage = Number(action.payload.currentPage);
       state.sort = action.payload.sort;
-      state.categoryId = Number(action.payload.categoryId);
+      state.categoryId = action.payload.categoryId;
     },
   },
 });

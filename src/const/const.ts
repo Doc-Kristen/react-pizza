@@ -8,8 +8,8 @@ type SortListItem = {
 }
 
 const sortingList: SortListItem[] = [
-  { name: 'сначала популярные', sortProperty: SortProperty.RATING_DESC },
-  { name: 'популярность (↑)', sortProperty: SortProperty.PRICE_ASC },
+  { name: 'популярности (↑)', sortProperty: SortProperty.RATING_ASC },
+  { name: 'популярности (↓)', sortProperty: SortProperty.RATING_DESC },
   { name: 'цене (по возрастанию)', sortProperty: SortProperty.PRICE_ASC },
   { name: 'цене (по убыванию)', sortProperty: SortProperty.PRICE_DESC },
   { name: 'алфавиту (А-Я)', sortProperty: SortProperty.TITLE_ASC },

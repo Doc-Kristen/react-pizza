@@ -41,7 +41,6 @@ const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-
   }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   React.useEffect(() => {
