@@ -6,7 +6,7 @@ const NotFoundComponent : React.FC = () => {
     return (
         <div className={styles.root}>
             <h1> Ничего не найдено :(</h1>
-            <Link to="/" className="button button--black">
+            <Link to="/" className="button button--orange">
                 <span>Вернуться на главную страницу</span>
             </Link>
         </div>

@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .button {
   display: inline-block;
@@ -8,7 +8,9 @@
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition:
+    background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
 
@@ -44,12 +46,17 @@
     border-width: 2px;
   }
 
-  &--black {
-    background-color: $color-black;
+  &--orange {
+    display: inline-block;
+    width: max-content;
+    text-align: center;
+    margin: 0 auto;
+    background-color: $color-orange;
 
     &:hover,
     &:active {
-      background-color: lighten($color: $color-black, $amount: 10);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
     }
   }
 
