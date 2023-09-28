@@ -5,7 +5,6 @@ import { URL } from '../const/const';
 
 const FullPizza: React.FC = () => {
     const navigate = useNavigate();
-
     const [pizza, setPizza] = React.useState<{ title: string; imageUrl: string; price: number }>();
     const { id } = useParams();
 
