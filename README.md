@@ -1,3 +1,9 @@
+Демо-версия сайта пиццерии. Репозиторий создан с целью целью попрактиковаться, поэкспериментировать.
+
+Стек: TypeScript, React, RTK. 
+
+В планах: покрыть тестами на Jest. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
