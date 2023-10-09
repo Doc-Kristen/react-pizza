@@ -1,6 +1,6 @@
 import React from 'react';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { sortingList } from '../const/const';
 import { Categories, Sort, PizzaBlock, Skeleton, Pagination} from '../components/index'
 import { useSelector } from 'react-redux';
@@ -15,10 +15,12 @@ const Home: React.FC = () => {
   const defaultItemCount = 6;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
+  
   const { items, status } = useSelector(selectPizzaData);
 
   const sortType = sort.sortProperty;
@@ -44,22 +46,6 @@ const Home: React.FC = () => {
   }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   React.useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = sortingList.find((obj) => obj.sortProperty === params.sortProperty);
-      dispatch(
-        setFilters({
-          searchValue: params.search as string,
-          categoryId: Number(params.category),
-          currentPage: currentPage,
-          sort: sort || sortingList[0],
-        })
-      );
-      isSearch.current = true;
-    }
-  }, [currentPage, dispatch]);
-
-  React.useEffect(() => {
     if (!isSearch.current) {
 
       const getPizzas = async () => {
@@ -82,6 +68,24 @@ const Home: React.FC = () => {
     }
     isSearch.current = false;
   }, [categoryId, currentPage, dispatch, searchValue, sortType]);
+
+  React.useEffect(() => {
+    if (!isMounted.current && location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = sortingList.find((obj) => obj.sortProperty === params.sortProperty);
+      dispatch(
+        setFilters({
+          searchValue: params.search as string,
+          categoryId: Number(params.category),
+          currentPage: currentPage,
+          sort: sort || sortingList[0],
+        })
+      );
+      isSearch.current = true;
+    }
+  }, [currentPage, dispatch, location.search]);
+
+
 
   return (
     <>
