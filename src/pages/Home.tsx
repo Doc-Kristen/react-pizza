@@ -2,11 +2,11 @@ import React from 'react';
 import qs from 'qs';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { sortingList } from '../const/const';
-import { Categories, Sort, PizzaBlock, Skeleton, Pagination} from '../components/index'
+import { Categories, Sort, PizzaBlock, Skeleton} from '../components/index'
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../redux/store';
 import { selectFilter } from '../redux/filter/selectors';
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/filter/slice';
+import { setCategoryId, setFilters } from '../redux/filter/slice';
 import { Status } from '../redux/pizza/types';
 import { selectPizzaData } from '../redux/pizza/selectors';
 import { fetchPizzas } from '../redux/pizza/asyncActions';
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
   }, [dispatch]);
-  const onChangePage = (page: number) => dispatch(setCurrentPage(page));
+  // const onChangePage = (page: number) => dispatch(setCurrentPage(page));
 
   React.useEffect(() => {
     if (isMounted.current) {
