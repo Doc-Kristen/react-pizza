@@ -100,9 +100,9 @@ const Home: React.FC = () => {
           <p>Проверьте корректность запроса или попробуйте позже.</p>
         </div>) : (<div className="content__items"> {status === Status.SUCCESS ? pizzas : skeletones}</div>)
       }
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
-        onPageChange={onChangePage} />
+        onPageChange={onChangePage} /> */}
     </>
   )
 }

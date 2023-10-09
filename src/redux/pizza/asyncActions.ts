@@ -4,9 +4,9 @@ import axios from "axios";
 import {URL} from "../../const/const";
 
 export const fetchPizzas = createAsyncThunk<PizzaItem[], FethchPizzasArgs>('pizza/fetchPizzasStatus', async (params, thunkAPI) => {
-    const { sortBy, order, category, search, currentPage } = params;
+    const { sortBy, order, category, search } = params;
     const { data } = await axios.get<PizzaItem[]>(
-      `${URL}/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      `${URL}/items?&${category}&sortBy=${sortBy}&order=${order}${search}`,
     );
     if (data.length === 0) {
       return thunkAPI.rejectWithValue(data);
